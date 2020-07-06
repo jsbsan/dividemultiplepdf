@@ -1,0 +1,60 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,133,71)
+  Icon = Picture["pdf.png"]
+  { Label1 Label
+    MoveScaled(3,2,37,3)
+    Text = ("Fichero PDF original:")
+  }
+  { TableViewDatos TableView
+    MoveScaled(3,19,128,44)
+  }
+  { ButtonEjecutar Button
+    MoveScaled(101,65,31,5)
+    Text = ("Crea Divisiones")
+  }
+  { TextLabel1 TextLabel
+    MoveScaled(4,66,15,3)
+    Text = ("Ruta Salida:")
+  }
+  { ButtonCargaPdf Button
+    MoveScaled(114,6,10,5)
+    Text = ("") & "..."
+    Picture = Picture["icon:/32/pdf"]
+  }
+  { ButtonFicheroOriginal TextBox
+    MoveScaled(3,6,108,5)
+  }
+  { ButtonRuta TextBox
+    MoveScaled(20,65,70,5)
+  }
+  { ButtonEligeRuta Button
+    MoveScaled(91,65,7,5)
+    Picture = Picture["icon:/32/directory"]
+  }
+  { TextBoxYEAR TextBox
+    MoveScaled(58,13,20,4)
+  }
+  { Label2 Label
+    MoveScaled(42,13,14,4)
+    Text = ("tag año:")
+    Alignment = Align.Right
+  }
+  { Label3 Label
+    MoveScaled(77,13,14,4)
+    Text = ("tag Presa:")
+    Alignment = Align.Right
+  }
+  { TextBoxPresa TextBox
+    MoveScaled(92,13,20,4)
+  }
+  { Label4 Label
+    MoveScaled(1,13,14,4)
+    Text = ("tag pefijo:")
+    Alignment = Align.Right
+  }
+  { TextBox1 TextBox
+    MoveScaled(16,13,9,4)
+  }
+}

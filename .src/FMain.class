@@ -1,0 +1,128 @@
+' Gambas class file
+
+Public Sub Form_Open()
+
+    Settings.Read(Me)
+    definirTableviewDatos()
+
+End
+
+Public Sub definirTableviewDatos()
+
+    With TableViewDatos
+        .header = 3
+        .rows.count = 40
+        .columns.count = 3
+        .Columns[0].title = "Pag. Inicio"
+        .Columns[1].title = "Pag. Final"
+        .Columns[2].title = "Nombre Salida"
+        .Columns[0].width = 120
+        .Columns[1].width = 120
+        .Columns[2].width = 320
+        .font.name = "Sans"
+        .font.size = 9
+        .Background = 16777215
+        .Foreground = 0
+    End With
+
+End
+
+Public Sub Form_Close()
+
+    Settings.Write(Me)
+
+End
+
+Public Sub ButtonFicheroOriginal_Filter()
+
+End
+
+Public Sub ButtonFicheroOriginal_Menu()
+
+    Print "hyola"
+
+End
+
+Public Sub ButtonFicheroOriginal_Click()
+
+End
+
+Public Sub ButtonEligeRuta_Click()
+
+    If Dialog.SelectDirectory() Then
+        'ha cancelado
+    Else
+        ButtonRuta.text = Dialog.Path
+
+    Endif
+
+End
+
+Public Sub ButtonCargaPdf_Click()
+
+    Dialog.Filter = ["*.pdf;*.PDF", "PDFs"]
+    If Dialog.OpenFile() Then
+        'ha cancelado
+    Else
+        ButtonFicheroOriginal.text = Dialog.Path
+        ButtonRuta.text = File.Dir(Dialog.Path)
+        TextBoxYEAR.text = Mid$(File.BaseName(Dialog.Path), 3, 2)
+        TextBoxPresa.text = parecidoNombrePresa(File.BaseName(Dialog.Path))
+
+    Endif
+
+End
+
+Public Sub TableViewDatos_Click()
+
+    Dim opcionesNombre As New String[]
+
+    opcionesNombre.Add("00 Informe Anual " & TextBoxYEAR.text & "Presa " & ".INDICE.pdf")
+    opcionesNombre.Add("01. Memoria")
+    opcionesNombre.Add("Anejo X.Datos Climaticos E Hidrologicos")
+    opcionesNombre.Add("Anejo X.Datos De Explotacion")
+    opcionesNombre.Add("Anejo X.Anejo Fotografico")
+    If TableViewDatos.column = 2 Then
+        TableViewDatos.Edit(opcionesNombre, True)
+    Else
+
+        TableViewDatos.EDIT
+    Endif
+
+End
+
+Public Sub TableViewDatos_Save(Row As Integer, Column As Integer, Value As String)
+
+    TableViewDatos[ROW, COLUMN].TEXT = VALUE
+
+End
+
+Public Sub ButtonEjecutar_Click()
+
+    Dim a As Integer
+    'por cada linea del tableview, ejecuta el siguiente comando
+    For a = 0 To TableViewDatos.rows.count - 1
+        'comprobar lineas en blanco
+        If TableViewDatos[a, 0].text = "" And TableViewDatos[a, 1].text = "" Then
+            Print "linea en blanco... no hacer nada..."; a
+        Else
+            Exec ["pdftk", "A=" & ButtonFicheroOriginal.text, "cat", "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text, ButtonRuta.text & "/" & TableViewDatos[a, 2].text]
+        Endif
+    Next
+    Message.Info("ok, trabajo realizado")
+
+End
+
+Public Function parecidoNombrePresa(nombre As String) As String
+
+    If InStr(Upper(nombre), Upper("puebla")) <> 0 Then Return "Puebla"
+    If InStr(Upper(nombre), Upper("agrio")) <> 0 Then Return "Agrio"
+    If InStr(Upper(nombre), Upper("aracena")) <> 0 Then Return "Aracena"
+    If InStr(Upper(nombre), Upper("huesn")) <> 0 Then Return "Huesna"
+    If InStr(Upper(nombre), Upper("melon")) <> 0 Then Return "Melonares"
+    If InStr(Upper(nombre), Upper("pinta")) <> 0 Then Return "Pintado"
+    If InStr(Upper(nombre), Upper("flor")) <> 0 Then Return "Peñaflor"
+    If InStr(Upper(nombre), Upper("Torr")) <> 0 Then Return "TorreAguila"
+    If InStr(Upper(nombre), Upper("Zufr")) <> 0 Then Return "Zufre"
+
+End
