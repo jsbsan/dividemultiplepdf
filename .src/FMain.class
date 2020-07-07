@@ -69,17 +69,17 @@ Public Sub TableViewDatos_Click()
 
     Dim opcionesNombre As New String[]
 
-    opcionesNombre.Add(TextBoxPrefijo.text & ".00 Informe Anual " & TextBoxYEAR.text & " Presa " & TextBoxPresa.text & ".INDICE.pdf")
-    opcionesNombre.Add(TextBoxPrefijo.text & ".01 Memoria")
-    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Planos")
-    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Datos Climaticos E Hidrologicos")
-    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Datos De Explotacion")
-    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Graficas de las variables de auscultacion")
-    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Datos de auscultacion")
-    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Reportaje Fotografico")
-    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Cronogramas de Inspecciones")
-    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Informe Estado Sistema Auscultacion")
-    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Campañas Topograficas")
+    opcionesNombre.Add("PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & TextBoxPresa.text & ".INDICE.pdf")
+    opcionesNombre.Add("PREFIJO-" & ".01 Memoria")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Planos")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos Climaticos E Hidrologicos")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos De Explotacion")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Graficas de las variables de auscultacion")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos de auscultacion")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Reportaje Fotografico")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Inspecciones")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Estado Sistema Auscultacion")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Campañas Topograficas")
     If TableViewDatos.column = 2 Then
         TableViewDatos.Edit(opcionesNombre, False)
     Else
@@ -111,6 +111,11 @@ Public Sub ButtonEjecutar_Click()
         If TableViewDatos[a, 0].text = "" And TableViewDatos[a, 1].text = "" Then
             Print "linea en blanco... no hacer nada..."; a
         Else
+''reemplazos
+TableViewDatos[a, 2].text = Replace(TableViewDatos[a, 2].text, "PREFIJO-", TextBoxPrefijo.text)
+TableViewDatos[a, 2].text = Replace(TableViewDatos[a, 2].text, "YYYY", TextBoxYEAR.text)
+
+
 
             Exec ["pdftk", "A=" & ButtonFicheroOriginal.text, "cat", "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text, "output", ButtonRuta.text & "/" & TableViewDatos[a, 2].text & ".pdf"]
         Endif

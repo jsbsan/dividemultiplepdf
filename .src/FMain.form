@@ -34,11 +34,11 @@
     Picture = Picture["icon:/32/directory"]
   }
   { TextBoxYEAR TextBox
-    MoveScaled(35,13,20,4)
+    MoveScaled(40,13,15,4)
   }
   { Label2 Label
-    MoveScaled(25,13,9,4)
-    Text = ("tag año:")
+    MoveScaled(25,13,14,4)
+    Text = ("tag año (YYYY):")
     Alignment = Align.Right
   }
   { Label3 Label
@@ -51,11 +51,12 @@
   }
   { Label4 Label
     MoveScaled(1,13,14,4)
-    Text = ("tag pefijo:")
+    Text = ("tag PREFIJO:")
     Alignment = Align.Right
   }
   { TextBoxPrefijo TextBox
     MoveScaled(16,13,9,4)
+    Background = &HFFFF00&
   }
   { LabelAnejo Label
     MoveScaled(89,13,12,4)
@@ -63,6 +64,7 @@
   }
   { valueboxAnejo ValueBox
     MoveScaled(101,13,6,4)
+    Background = &HFFFF00&
     Text = ("0")
   }
   { ButtonCargaDiv Button
