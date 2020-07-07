@@ -60,7 +60,7 @@ Public Sub ButtonCargaPdf_Click()
         ButtonRuta.text = File.Dir(Dialog.Path)
         TextBoxYEAR.text = Mid$(File.BaseName(Dialog.Path), 3, 5)
         TextBoxPresa.text = parecidoNombrePresa(File.BaseName(Dialog.Path))
-        valueboxAnejo.Value = 1
+        valueboxAnejo.Value = 0
     Endif
 
 End
@@ -120,7 +120,7 @@ End
 
 Public Function parecidoNombrePresa(nombre As String) As String
 
-    If InStr(Upper(nombre), Upper("puebla")) <> 0 Then Return "Puebla"
+    If InStr(Upper(nombre), Upper("puebla")) <> 0 Then Return "Puebla De Cazalla"
     If InStr(Upper(nombre), Upper("agrio")) <> 0 Then Return "Agrio"
     If InStr(Upper(nombre), Upper("aracena")) <> 0 Then Return "Aracena"
     If InStr(Upper(nombre), Upper("huesn")) <> 0 Then Return "Huesna"
