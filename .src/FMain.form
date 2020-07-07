@@ -34,27 +34,45 @@
     Picture = Picture["icon:/32/directory"]
   }
   { TextBoxYEAR TextBox
-    MoveScaled(58,13,20,4)
+    MoveScaled(35,13,20,4)
   }
   { Label2 Label
-    MoveScaled(42,13,14,4)
+    MoveScaled(25,13,9,4)
     Text = ("tag año:")
     Alignment = Align.Right
   }
   { Label3 Label
-    MoveScaled(77,13,14,4)
+    MoveScaled(56,13,11,4)
     Text = ("tag Presa:")
     Alignment = Align.Right
   }
   { TextBoxPresa TextBox
-    MoveScaled(92,13,20,4)
+    MoveScaled(68,13,20,4)
   }
   { Label4 Label
     MoveScaled(1,13,14,4)
     Text = ("tag pefijo:")
     Alignment = Align.Right
   }
-  { TextBox1 TextBox
+  { TextBoxPrefijo TextBox
     MoveScaled(16,13,9,4)
+  }
+  { LabelAnejo Label
+    MoveScaled(89,13,12,4)
+    Text = ("Cont.Anejos")
+  }
+  { valueboxAnejo ValueBox
+    MoveScaled(101,13,6,4)
+    Text = ("0")
+  }
+  { ButtonCargaDiv Button
+    MoveScaled(109,13,8,5)
+    ToolTip = ("Carga Divisiones")
+    Picture = Picture["icon:/32/open"]
+  }
+  { ButtonGuardaDiv Button
+    MoveScaled(121,13,8,5)
+    ToolTip = ("Guarda Divisiones")
+    Picture = Picture["icon:/32/save"]
   }
 }

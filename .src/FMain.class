@@ -60,7 +60,7 @@ Public Sub ButtonCargaPdf_Click()
         ButtonRuta.text = File.Dir(Dialog.Path)
         TextBoxYEAR.text = Mid$(File.BaseName(Dialog.Path), 3, 5)
         TextBoxPresa.text = parecidoNombrePresa(File.BaseName(Dialog.Path))
-
+        valueboxAnejo.Value = 1
     Endif
 
 End
@@ -69,16 +69,16 @@ Public Sub TableViewDatos_Click()
 
     Dim opcionesNombre As New String[]
 
-    opcionesNombre.Add("00 Informe Anual " & TextBoxYEAR.text & " Presa " & TextBoxPresa.text & ".INDICE.pdf")
-    opcionesNombre.Add("01. Memoria")
-    opcionesNombre.Add("Anejo X.Planos")
-    opcionesNombre.Add("Anejo X.Datos Climaticos E Hidrologicos")
-    opcionesNombre.Add("Anejo X.Datos De Explotacion")
-    opcionesNombre.Add("Anejo X.Graficas de las variables de auscultacion")
-    opcionesNombre.Add("Anejo X.Reportaje Fotografico")
-    opcionesNombre.Add("Anejo X.Cronogramas de Inspecciones")
-    opcionesNombre.Add("Anejo X.Informe Estado Sistema Auscultacion")
-    opcionesNombre.Add("Anejo X.Campañas Topograficas")
+    opcionesNombre.Add(TextBoxPrefijo.text & ".00 Informe Anual " & TextBoxYEAR.text & " Presa " & TextBoxPresa.text & ".INDICE.pdf")
+    opcionesNombre.Add(TextBoxPrefijo.text & ".01 Memoria")
+    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Planos")
+    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Datos Climaticos E Hidrologicos")
+    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Datos De Explotacion")
+    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Graficas de las variables de auscultacion")
+    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Reportaje Fotografico")
+    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Cronogramas de Inspecciones")
+    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Informe Estado Sistema Auscultacion")
+    opcionesNombre.Add(TextBoxPrefijo.text & ".02 Anejo X.Campañas Topograficas")
     If TableViewDatos.column = 2 Then
         TableViewDatos.Edit(opcionesNombre, False)
     Else
@@ -89,6 +89,13 @@ Public Sub TableViewDatos_Click()
 End
 
 Public Sub TableViewDatos_Save(Row As Integer, Column As Integer, Value As String)
+
+    If InStr(value, "Anejo") > 0 Then
+        'reemplazo contador de anejos
+        valueboxAnejo.Value = valueboxAnejo.Value + 0.5
+        value = Replace(value, "X", Str$(valueboxAnejo.Value))
+
+    Endif
 
     TableViewDatos[ROW, COLUMN].TEXT = VALUE
 
@@ -122,5 +129,49 @@ Public Function parecidoNombrePresa(nombre As String) As String
     If InStr(Upper(nombre), Upper("flor")) <> 0 Then Return "Penaflor"
     If InStr(Upper(nombre), Upper("Torr")) <> 0 Then Return "TorreAguila"
     If InStr(Upper(nombre), Upper("Zufr")) <> 0 Then Return "Zufre"
+
+End
+
+Public Sub Label3_MouseDown()
+
+End
+
+Public Sub ButtonGuardaDiv_Click()
+
+    Dim contenido As String = ""
+    Dim linea As String = ""
+    Dim a, b As Integer
+
+    For a = 0 To TableViewDatos.rows.count - 1
+        linea = ""
+        For b = 0 To TableViewDatos.columns.count - 1
+            linea &= TableViewDatos[a, b].text & gb.Tab
+        Next
+        contenido &= linea & "|"
+
+    Next
+
+    Settings["contenido"] = contenido
+
+End
+
+Public Sub ButtonCargaDiv_Click()
+
+    Dim contenido As String
+    Dim lineas As String[]
+    Dim valores As String[]
+    Dim a, b As Integer
+
+    contenido = Settings["contenido", ""]
+    lineas = Split(contenido, "|")
+
+    For a = 0 To lineas.count - 1
+        If lineas[a] = "" Then Return
+        valores = Split(lineas[a], gb.Tab)
+        For b = 0 To TableViewDatos.columns.count - 1
+            TableViewDatos[a, b].text = valores[b]
+        Next
+
+    Next
 
 End
