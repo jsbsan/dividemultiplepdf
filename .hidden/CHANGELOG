@@ -1,3 +1,6 @@
+* Tue Jul 07 2020 mint <mint@mint-SSD> 0.0.6
+- parametrizo presa y no cambia los parametros  al generar las divisiones
+
 * Tue Jul 07 2020 mint <mint@mint-SSD> 0.0.5
 - prefijos y año como parametros
 

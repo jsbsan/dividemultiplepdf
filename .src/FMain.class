@@ -69,7 +69,7 @@ Public Sub TableViewDatos_Click()
 
     Dim opcionesNombre As New String[]
 
-    opcionesNombre.Add("PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & TextBoxPresa.text & ".INDICE.pdf")
+    opcionesNombre.Add("PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE.pdf")
     opcionesNombre.Add("PREFIJO-" & ".01 Memoria")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Planos")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos Climaticos E Hidrologicos")
@@ -104,6 +104,8 @@ End
 
 Public Sub ButtonEjecutar_Click()
 
+    Dim nombresalida As String
+
     Dim a As Integer
     'por cada linea del tableview, ejecuta el siguiente comando
     For a = 0 To TableViewDatos.rows.count - 1
@@ -111,13 +113,12 @@ Public Sub ButtonEjecutar_Click()
         If TableViewDatos[a, 0].text = "" And TableViewDatos[a, 1].text = "" Then
             Print "linea en blanco... no hacer nada..."; a
         Else
-''reemplazos
-TableViewDatos[a, 2].text = Replace(TableViewDatos[a, 2].text, "PREFIJO-", TextBoxPrefijo.text)
-TableViewDatos[a, 2].text = Replace(TableViewDatos[a, 2].text, "YYYY", TextBoxYEAR.text)
+            ''reemplazos
+            nombresalida = Replace(TableViewDatos[a, 2].text, "PREFIJO-", TextBoxPrefijo.text)
+            nombresalida = Replace(nombresalida, "YYYY", TextBoxYEAR.text)
+            nombresalida = Replace(nombresalida, "ZZZZZ", TextBoxPresa.text)
 
-
-
-            Exec ["pdftk", "A=" & ButtonFicheroOriginal.text, "cat", "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text, "output", ButtonRuta.text & "/" & TableViewDatos[a, 2].text & ".pdf"]
+            Exec ["pdftk", "A=" & ButtonFicheroOriginal.text, "cat", "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text, "output", ButtonRuta.text & "/" & nombresalida & ".pdf"]
         Endif
     Next
     Message.Info("ok, trabajo realizado")
