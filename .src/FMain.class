@@ -57,7 +57,10 @@ Public Sub ButtonCargaPdf_Click()
         'ha cancelado
     Else
         ButtonFicheroOriginal.text = Dialog.Path
-        ButtonRuta.text = File.Dir(Dialog.Path)
+        If ButtonRuta.text = "" Then
+            'si esta vacia pongo la ruta del fichero que voy a abrir, sino no hago nada.
+            ButtonRuta.text = File.Dir(Dialog.Path)
+        Endif
         TextBoxYEAR.text = Mid$(File.BaseName(Dialog.Path), 3, 5)
         TextBoxPresa.text = parecidoNombrePresa(File.BaseName(Dialog.Path))
         valueboxAnejo.Value = 0
@@ -180,5 +183,30 @@ Public Sub ButtonCargaDiv_Click()
         Next
 
     Next
+
+End
+
+Public Sub ButtonLimpiar_Click()
+
+    ButtonFicheroOriginal.text = ""
+    TextBoxPrefijo.text = ""
+    valueboxAnejo.text = ""
+    valueboxAnejo.text = ""
+    limpiarTableViewDatos()
+    TextBoxYEAR.text = ""
+    TextBoxPresa.text = ""
+    definirTableviewDatos()
+
+End
+
+Public Sub limpiarTableViewDatos()
+
+    TableViewDatos.Clear
+
+End
+
+Public Sub ButtonVER_Click()
+
+    Desktop.Open(ButtonFicheroOriginal.text)
 
 End

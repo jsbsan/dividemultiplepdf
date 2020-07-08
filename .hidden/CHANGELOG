@@ -1,3 +1,6 @@
+* Wed Jul 08 2020 mint <mint@mint-SSD> 0.0.7
+- limpia formulario y puede muestrar archivo seleccionado
+
 * Tue Jul 07 2020 mint <mint@mint-SSD> 0.0.6
 - parametrizo presa y no cambia los parametros  al generar las divisiones
 
