@@ -2,7 +2,7 @@
 Title=dividemultiplepdf
 Startup=FMain
 Icon=pdf.png
-Version=0.0.7
+Version=0.0.8
 Component=gb.image
 Component=gb.gui.qt
 Component=gb.form
@@ -16,7 +16,7 @@ Language=en_US
 Maintainer=mint
 Address=mint@mint-SSD
 License=General Public License
-PackageName=dividemultiplepdf-0.0.7
+PackageName=dividemultiplepdf-0.0.8
 CreateEachDirectory=1
 Packager=1
 Systems=debian

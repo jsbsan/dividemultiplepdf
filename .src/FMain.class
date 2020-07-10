@@ -1,5 +1,8 @@
 ' Gambas class file
 
+Public listaProcesos As New Process[]
+Public TotalProcesosActivos As Integer = 0
+
 Public Sub Form_Open()
 
     Settings.Read(Me)
@@ -108,8 +111,14 @@ End
 Public Sub ButtonEjecutar_Click()
 
     Dim nombresalida As String
-
+    Dim hproc As Process
     Dim a As Integer
+
+    listaProcesos.Clear()
+    Spinner1.visible = True
+    Spinner1.Start
+    Timer1.Start()
+    TotalProcesosActivos = 0
     'por cada linea del tableview, ejecuta el siguiente comando
     For a = 0 To TableViewDatos.rows.count - 1
         'comprobar lineas en blanco
@@ -121,10 +130,15 @@ Public Sub ButtonEjecutar_Click()
             nombresalida = Replace(nombresalida, "YYYY", TextBoxYEAR.text)
             nombresalida = Replace(nombresalida, "ZZZZZ", TextBoxPresa.text)
 
-            Exec ["pdftk", "A=" & ButtonFicheroOriginal.text, "cat", "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text, "output", ButtonRuta.text & "/" & nombresalida & ".pdf"]
+            hproc = Exec ["pdftk", "A=" & ButtonFicheroOriginal.text, "cat", "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text, "output", ButtonRuta.text & "/" & nombresalida & ".pdf"]
+
+            listaProcesos.Add(HPROC)
         Endif
     Next
-    Message.Info("ok, trabajo realizado")
+
+    TotalProcesosActivos = listaProcesos.Count
+
+    ' Message.Info("ok, en segundo plano se estan realizando los trabajos")
 
 End
 
@@ -208,5 +222,37 @@ End
 Public Sub ButtonVER_Click()
 
     Desktop.Open(ButtonFicheroOriginal.text)
+
+End
+
+Public Sub Spinner1_MouseDown()
+
+End
+
+Public Sub Timer1_Timer()
+
+    Dim htmp As Process
+    Dim a As Integer
+    'comprobar
+
+    For a = 0 To listaProcesos.count - 1
+        Try htmp = listaProcesos[a]
+        If Error Then Message.Info("No encuentro proceso en  Lista de Procesos ¿?")
+
+        If htmp.State <> htmp.Running Then
+            listaProcesos.Delete(a)
+            Break 'salgo del bucle
+        Endif
+    Next
+
+    If listaProcesos.count <= 0 Then
+        Spinner1.Stop
+        Spinner1.visible = False
+        ProgressBar1.value = 0
+        Timer1.Stop()
+        Message.Info("Terminado de Procesar Ficheros")
+    Else
+        ProgressBar1.value = listaProcesos.count / TotalProcesosActivos
+    Endif
 
 End

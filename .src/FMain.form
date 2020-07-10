@@ -13,6 +13,7 @@
   { ButtonEjecutar Button
     MoveScaled(101,65,31,5)
     Text = ("Crea Divisiones")
+    Picture = Picture["icon:/32/exec"]
   }
   { TextLabel1 TextLabel
     MoveScaled(4,63,15,3)
@@ -87,5 +88,19 @@
     MoveScaled(124,6,7,5)
     ToolTip = ("mostra fichero seleccionado")
     Picture = Picture["icon:/32/watch"]
+  }
+  { ProgressBar1 ProgressBar
+    MoveScaled(93,1,29,3)
+  }
+  { Label5 Label
+    MoveScaled(76,1,16,3)
+    Text = ("Procesos Activos:")
+  }
+  { Spinner1 Spinner
+    MoveScaled(125,0,6,5)
+    Border = True
+  }
+  { Timer1 #Timer
+    #MoveScaled(124,56)
   }
 }
