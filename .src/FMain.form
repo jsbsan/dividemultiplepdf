@@ -26,6 +26,7 @@
   }
   { ButtonFicheroOriginal TextBox
     MoveScaled(3,6,108,5)
+    Drop = True
   }
   { ButtonRuta TextBox
     MoveScaled(4,66,89,4)
@@ -85,7 +86,7 @@
     Picture = Picture["icon:/32/clear"]
   }
   { ButtonVER Button
-    MoveScaled(124,6,7,5)
+    MoveScaled(121,6,7,5)
     ToolTip = ("mostra fichero seleccionado")
     Picture = Picture["icon:/32/watch"]
   }

@@ -257,3 +257,17 @@ Public Sub Timer1_Timer()
     Endif
 
 End
+
+Public Sub ButtonFicheroOriginal_Drop()
+
+    ButtonFicheroOriginal.TEXT = Split(Drag.Data, "\r")[0]
+    ButtonFicheroOriginal.TEXT = Replace(Replace(ButtonFicheroOriginal.TEXT, "%20", " "), "file://", "")
+    If ButtonRuta.text = "" Then
+        'si esta vacia pongo la ruta del fichero que voy a abrir, sino no hago nada.
+        ButtonRuta.text = File.Dir(ButtonFicheroOriginal.TEXT)
+    Endif
+    TextBoxYEAR.text = Mid$(File.BaseName(ButtonFicheroOriginal.TEXT), 3, 5)
+    TextBoxPresa.text = parecidoNombrePresa(File.BaseName(ButtonFicheroOriginal.TEXT))
+    valueboxAnejo.Value = 0
+
+End
