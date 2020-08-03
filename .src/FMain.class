@@ -75,6 +75,7 @@ Public Sub TableViewDatos_Click()
 
     Dim opcionesNombre As New String[]
 
+    opcionesNombre.Add("PREFIJO-" & ".00 Memoria Explotacion " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE.pdf")
     opcionesNombre.Add("PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE.pdf")
     opcionesNombre.Add("PREFIJO-" & ".01 Memoria")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Planos")
