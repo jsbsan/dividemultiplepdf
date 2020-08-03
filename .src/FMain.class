@@ -87,6 +87,8 @@ Public Sub TableViewDatos_Click()
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Inspecciones")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Estado Sistema Auscultacion")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Campañas Topograficas")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Fichas Mantenimiento Correctivo")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Calidad de Aguas")
     If TableViewDatos.column = 2 Then
         TableViewDatos.Edit(opcionesNombre, False)
     Else
