@@ -82,13 +82,15 @@ Public Sub TableViewDatos_Click()
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos Climaticos E Hidrologicos")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos De Explotacion")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Graficas de las variables de auscultacion")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos de auscultacion")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos De Auscultacion")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Reportaje Fotografico")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Inspecciones")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Mantenimiento")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Estado Sistema Auscultacion")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Campañas Topograficas")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Fichas Mantenimiento Correctivo")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Calidad de Aguas")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe")
     If TableViewDatos.column = 2 Then
         TableViewDatos.Edit(opcionesNombre, False)
     Else
@@ -109,6 +111,15 @@ Public Sub TableViewDatos_Save(Row As Integer, Column As Integer, Value As Strin
 
     TableViewDatos[ROW, COLUMN].TEXT = VALUE
 
+    'si estamos en la 1º columna, y la 2º columna del anterior fila esta vacia, le resto un 1
+    If column = 0 Then
+        If row > 0 Then
+            If TableViewDatos[row - 1, 1].text = "" Then
+                TableViewDatos[row - 1, 1].text = Str$(Val(TableViewDatos[row, 0].text) - 1)
+            Endif
+        Endif
+    Endif
+
 End
 
 Public Sub ButtonEjecutar_Click()
@@ -118,6 +129,7 @@ Public Sub ButtonEjecutar_Click()
     Dim a As Integer
 
     listaProcesos.Clear()
+
     Spinner1.visible = True
     Spinner1.Start
     Timer1.Start()
@@ -271,5 +283,16 @@ Public Sub ButtonFicheroOriginal_Drop()
     TextBoxYEAR.text = Mid$(File.BaseName(ButtonFicheroOriginal.TEXT), 3, 5)
     TextBoxPresa.text = parecidoNombrePresa(File.BaseName(ButtonFicheroOriginal.TEXT))
     valueboxAnejo.Value = 0
+
+End
+
+Public Sub ButtonLimpiarNumeros_Click()
+
+    Dim a As Integer
+
+    For a = 0 To TableViewDatos.rows.count - 1
+        TableViewDatos[a, 0].text = ""
+        TableViewDatos[a, 1].text = ""
+    Next
 
 End

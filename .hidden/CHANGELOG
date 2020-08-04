@@ -1,3 +1,6 @@
+* Tue Aug 04 2020 jsbsan <jusabejusabe@gmail.com> 0.0.12
+- mejorar al insertar numero en la 1 columna, pone el numero anterior en la 2º columna anterior. Ademas se añade borrar numeros de columnas
+
 * Mon Aug 03 2020 jsbsan <jusabejusabe@gmail.com> 0.0.11
 - agrego mas tipos de anejos en combobox calidad de aguas y fichas mantenimiento
 

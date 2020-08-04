@@ -1,22 +1,22 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,133,71)
+  MoveScaled(0,0,133,80)
   Icon = Picture["pdf.png"]
   { Label1 Label
     MoveScaled(3,2,37,3)
     Text = ("Fichero PDF original:")
   }
   { TableViewDatos TableView
-    MoveScaled(3,19,128,44)
+    MoveScaled(3,19,128,53)
   }
   { ButtonEjecutar Button
-    MoveScaled(101,65,31,5)
+    MoveScaled(101,74,31,5)
     Text = ("Crea Divisiones")
     Picture = Picture["icon:/32/exec"]
   }
   { TextLabel1 TextLabel
-    MoveScaled(4,63,15,3)
+    MoveScaled(4,72,15,3)
     Text = ("Ruta Salida:")
   }
   { ButtonCargaPdf Button
@@ -29,11 +29,11 @@
     Drop = True
   }
   { ButtonRuta TextBox
-    MoveScaled(4,66,89,4)
+    MoveScaled(4,75,89,4)
     Font = Font["-2"]
   }
   { ButtonEligeRuta Button
-    MoveScaled(94,65,7,5)
+    MoveScaled(94,74,7,5)
     Picture = Picture["icon:/32/directory"]
   }
   { TextBoxYEAR TextBox
@@ -81,7 +81,7 @@
     Picture = Picture["icon:/32/save"]
   }
   { ButtonLimpiar Button
-    MoveScaled(44,0,26,5)
+    MoveScaled(25,0,26,5)
     Text = ("Limpiar formulario")
     Picture = Picture["icon:/32/clear"]
   }
@@ -103,5 +103,11 @@
   }
   { Timer1 #Timer
     #MoveScaled(124,56)
+  }
+  { ButtonLimpiarNumeros Button
+    MoveScaled(55,0,17,5)
+    ToolTip = ("Borrar Números de Páginas")
+    Text = ("# ##")
+    Picture = Picture["icon:/32/clear"]
   }
 }
