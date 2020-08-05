@@ -67,6 +67,7 @@ Public Sub ButtonCargaPdf_Click()
         TextBoxYEAR.text = Mid$(File.BaseName(Dialog.Path), 3, 5)
         TextBoxPresa.text = parecidoNombrePresa(File.BaseName(Dialog.Path))
         valueboxAnejo.Value = 0
+        TextBoxPrefijo.text = ""
     Endif
 
 End
@@ -75,8 +76,8 @@ Public Sub TableViewDatos_Click()
 
     Dim opcionesNombre As New String[]
 
-    opcionesNombre.Add("PREFIJO-" & ".00 Memoria Explotacion " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE.pdf")
-    opcionesNombre.Add("PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE.pdf")
+    opcionesNombre.Add("PREFIJO-" & ".00 Memoria Explotacion " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE")
+    opcionesNombre.Add("PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE")
     opcionesNombre.Add("PREFIJO-" & ".01 Memoria")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Planos")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos Climaticos E Hidrologicos")
@@ -224,6 +225,8 @@ Public Sub ButtonLimpiar_Click()
     limpiarTableViewDatos()
     TextBoxYEAR.text = ""
     TextBoxPresa.text = ""
+    ButtonRuta.text = ""
+
     definirTableviewDatos()
 
 End
@@ -283,6 +286,7 @@ Public Sub ButtonFicheroOriginal_Drop()
     TextBoxYEAR.text = Mid$(File.BaseName(ButtonFicheroOriginal.TEXT), 3, 5)
     TextBoxPresa.text = parecidoNombrePresa(File.BaseName(ButtonFicheroOriginal.TEXT))
     valueboxAnejo.Value = 0
+    TextBoxPrefijo.text = ""
 
 End
 

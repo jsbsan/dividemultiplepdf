@@ -1,3 +1,6 @@
+* Wed Aug 05 2020 jsbsan <jusabejusabe@gmail.com> 0.0.14
+- arrastro y prefijo lo dejo en blanco
+
 * Tue Aug 04 2020 jsbsan <jusabejusabe@gmail.com> 0.0.12
 - mejorar al insertar numero en la 1 columna, pone el numero anterior en la 2º columna anterior. Ademas se añade borrar numeros de columnas
 
