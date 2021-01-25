@@ -68,6 +68,15 @@ Public Sub ButtonCargaPdf_Click()
         TextBoxPresa.text = parecidoNombrePresa(File.BaseName(Dialog.Path))
         valueboxAnejo.Value = 0
         TextBoxPrefijo.text = ""
+
+        If Mid$(File.BaseName(Dialog.Path), 1, 2) = "ME" Then
+            TableViewDatos[0, 2].text = "PREFIJO-" & ".00 Memoria Explotacion " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE"
+            TableViewDatos[0, 0].text = "1"
+        Endif
+        If Mid$(File.BaseName(Dialog.Path), 1, 2) = "IA" Then
+            TableViewDatos[0, 2].text = "PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE"
+            TableViewDatos[0, 0].text = "1"
+        Endif
     Endif
 
 End
@@ -79,6 +88,7 @@ Public Sub TableViewDatos_Click()
     opcionesNombre.Add("PREFIJO-" & ".00 Memoria Explotacion " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE")
     opcionesNombre.Add("PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE")
     opcionesNombre.Add("PREFIJO-" & ".01 Memoria")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo 0.Indice de Anejos")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Planos")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos Climaticos E Hidrologicos")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos De Explotacion")
@@ -88,10 +98,11 @@ Public Sub TableViewDatos_Click()
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Inspecciones")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Mantenimiento")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Estado Sistema Auscultacion")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Campañas Topograficas")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informes Topografia")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Fichas Mantenimiento Correctivo")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Calidad de Aguas")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe.IE")
     If TableViewDatos.column = 2 Then
         TableViewDatos.Edit(opcionesNombre, False)
     Else
@@ -116,7 +127,7 @@ Public Sub TableViewDatos_Save(Row As Integer, Column As Integer, Value As Strin
     If column = 0 Then
         If row > 0 Then
             If TableViewDatos[row - 1, 1].text = "" Then
-                TableViewDatos[row - 1, 1].text = Str$(Val(TableViewDatos[row, 0].text) - 1)
+                Try TableViewDatos[row - 1, 1].text = Str$(Val(TableViewDatos[row, 0].text) - 1) 'hace el intento, por si no hay numero
             Endif
         Endif
     Endif
@@ -287,6 +298,14 @@ Public Sub ButtonFicheroOriginal_Drop()
     TextBoxPresa.text = parecidoNombrePresa(File.BaseName(ButtonFicheroOriginal.TEXT))
     valueboxAnejo.Value = 0
     TextBoxPrefijo.text = ""
+    If Mid$(File.BaseName(ButtonFicheroOriginal.TEXT), 1, 2) = "ME" Then
+        TableViewDatos[0, 2].text = "PREFIJO-" & ".00 Memoria Explotacion " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE"
+        TableViewDatos[0, 0].text = "1"
+    Endif
+    If Mid$(File.BaseName(ButtonFicheroOriginal.TEXT), 1, 2) = "IA" Then
+        TableViewDatos[0, 2].text = "PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE"
+        TableViewDatos[0, 0].text = "1"
+    Endif
 
 End
 
