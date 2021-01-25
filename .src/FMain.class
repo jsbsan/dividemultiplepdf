@@ -117,7 +117,7 @@ Public Sub TableViewDatos_Save(Row As Integer, Column As Integer, Value As Strin
     If InStr(value, "Anejo") > 0 Then
         'reemplazo contador de anejos
         valueboxAnejo.Value = valueboxAnejo.Value + 0.5
-        value = Replace(value, "X", Str$(valueboxAnejo.Value))
+        value = Replace(value, "X", Right("0" & Str$(valueboxAnejo.Value), 2))
 
     Endif
 
