@@ -1,113 +1,137 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,133,80)
+  MoveScaled(0,0,140,91)
+  Expand = True
   Icon = Picture["pdf.png"]
-  { Label1 Label
-    MoveScaled(3,2,37,3)
-    Text = ("Fichero PDF original:")
+  Arrangement = Arrange.Vertical
+  AutoResize = True
+  { Panel2 Panel
+    MoveScaled(0,0,137,20)
+    { Label1 Label
+      MoveScaled(2,2,37,3)
+      Text = ("Fichero PDF original:")
+    }
+    { ButtonCargaPdf Button
+      MoveScaled(110,6,10,5)
+      Text = ("") & "..."
+      Picture = Picture["icon:/32/pdf"]
+    }
+    { ButtonFicheroOriginal TextBox
+      MoveScaled(2,6,108,5)
+      Drop = True
+    }
+    { TextBoxYEAR TextBox
+      MoveScaled(39,13,15,4)
+    }
+    { Label2 Label
+      MoveScaled(24,13,14,4)
+      Text = ("tag año (YYYY):")
+      Alignment = Align.Right
+    }
+    { Label3 Label
+      MoveScaled(55,13,11,4)
+      Text = ("tag Presa:")
+      Alignment = Align.Right
+    }
+    { TextBoxPresa TextBox
+      MoveScaled(67,13,19,4)
+    }
+    { Label4 Label
+      MoveScaled(0,13,14,4)
+      Text = ("tag PREFIJO:")
+      Alignment = Align.Right
+    }
+    { TextBoxPrefijo TextBox
+      MoveScaled(15,13,9,4)
+      Background = &HFFFF00&
+    }
+    { LabelAnejo Label
+      MoveScaled(87,13,10,4)
+      Text = ("Cont.Anejos")
+    }
+    { valueboxAnejo ValueBox
+      MoveScaled(97,13,4,4)
+      Background = &HFFFF00&
+      Text = ("0")
+    }
+    { ButtonCargaDiv Button
+      MoveScaled(108,13,8,5)
+      ToolTip = ("Carga Divisiones")
+      Picture = Picture["icon:/32/open"]
+    }
+    { ButtonGuardaDiv Button
+      MoveScaled(120,13,8,5)
+      ToolTip = ("Guarda Divisiones")
+      Picture = Picture["icon:/32/save"]
+    }
+    { ButtonLimpiar Button
+      MoveScaled(24,0,26,5)
+      Text = ("Limpiar formulario")
+      Picture = Picture["icon:/32/clear"]
+    }
+    { ButtonVER Button
+      MoveScaled(120,6,7,5)
+      ToolTip = ("mostra fichero seleccionado")
+      Picture = Picture["icon:/32/watch"]
+    }
+    { ProgressBar1 ProgressBar
+      MoveScaled(92,1,29,3)
+    }
+    { Label5 Label
+      MoveScaled(75,1,16,3)
+      Text = ("Procesos Activos:")
+    }
+    { Spinner1 Spinner
+      MoveScaled(124,0,6,5)
+      Border = True
+    }
+    { ButtonLimpiarNumeros Button
+      MoveScaled(54,0,17,5)
+      ToolTip = ("Borrar Números de Páginas")
+      Text = ("# ##")
+      Picture = Picture["icon:/32/clear"]
+    }
+    { ButtonNumerar Button
+      MoveScaled(101,13,5,4)
+      ToolTip = ("Numerar sustituyendo X por un numero")
+      Text = ("#")
+      Picture = Picture["icon:/small/info"]
+    }
+    { PictureBox1 PictureBox
+      MoveScaled(128,6,5,5)
+      Picture = Picture["log.png"]
+      Stretch = True
+    }
   }
-  { TableViewDatos TableView
-    MoveScaled(3,19,128,53)
+  { VBox1 VBox
+    MoveScaled(3,22,133,58)
+    Expand = True
+    { TableViewDatos TableView
+      MoveScaled(1,2,128,53)
+      Expand = True
+    }
+    { Timer1 #Timer
+    }
   }
-  { ButtonEjecutar Button
-    MoveScaled(101,74,31,5)
-    Text = ("Crea Divisiones")
-    Picture = Picture["icon:/32/exec"]
-  }
-  { TextLabel1 TextLabel
-    MoveScaled(4,72,15,3)
-    Text = ("Ruta Salida:")
-  }
-  { ButtonCargaPdf Button
-    MoveScaled(111,6,10,5)
-    Text = ("") & "..."
-    Picture = Picture["icon:/32/pdf"]
-  }
-  { ButtonFicheroOriginal TextBox
-    MoveScaled(3,6,108,5)
-    Drop = True
-  }
-  { ButtonRuta TextBox
-    MoveScaled(4,75,89,4)
-    Font = Font["-2"]
-  }
-  { ButtonEligeRuta Button
-    MoveScaled(94,74,7,5)
-    Picture = Picture["icon:/32/directory"]
-  }
-  { TextBoxYEAR TextBox
-    MoveScaled(40,13,15,4)
-  }
-  { Label2 Label
-    MoveScaled(25,13,14,4)
-    Text = ("tag año (YYYY):")
-    Alignment = Align.Right
-  }
-  { Label3 Label
-    MoveScaled(56,13,11,4)
-    Text = ("tag Presa:")
-    Alignment = Align.Right
-  }
-  { TextBoxPresa TextBox
-    MoveScaled(68,13,20,4)
-  }
-  { Label4 Label
-    MoveScaled(1,13,14,4)
-    Text = ("tag PREFIJO:")
-    Alignment = Align.Right
-  }
-  { TextBoxPrefijo TextBox
-    MoveScaled(16,13,9,4)
-    Background = &HFFFF00&
-  }
-  { LabelAnejo Label
-    MoveScaled(89,13,12,4)
-    Text = ("Cont.Anejos")
-  }
-  { valueboxAnejo ValueBox
-    MoveScaled(101,13,6,4)
-    Background = &HFFFF00&
-    Text = ("0")
-  }
-  { ButtonCargaDiv Button
-    MoveScaled(109,13,8,5)
-    ToolTip = ("Carga Divisiones")
-    Picture = Picture["icon:/32/open"]
-  }
-  { ButtonGuardaDiv Button
-    MoveScaled(121,13,8,5)
-    ToolTip = ("Guarda Divisiones")
-    Picture = Picture["icon:/32/save"]
-  }
-  { ButtonLimpiar Button
-    MoveScaled(25,0,26,5)
-    Text = ("Limpiar formulario")
-    Picture = Picture["icon:/32/clear"]
-  }
-  { ButtonVER Button
-    MoveScaled(121,6,7,5)
-    ToolTip = ("mostra fichero seleccionado")
-    Picture = Picture["icon:/32/watch"]
-  }
-  { ProgressBar1 ProgressBar
-    MoveScaled(93,1,29,3)
-  }
-  { Label5 Label
-    MoveScaled(76,1,16,3)
-    Text = ("Procesos Activos:")
-  }
-  { Spinner1 Spinner
-    MoveScaled(125,0,6,5)
-    Border = True
-  }
-  { Timer1 #Timer
-    #MoveScaled(124,56)
-  }
-  { ButtonLimpiarNumeros Button
-    MoveScaled(55,0,17,5)
-    ToolTip = ("Borrar Números de Páginas")
-    Text = ("# ##")
-    Picture = Picture["icon:/32/clear"]
+  { Panel1 Panel
+    MoveScaled(2,80,133,8)
+    { ButtonEjecutar Button
+      MoveScaled(97,2,31,5)
+      Text = ("Crea Divisiones")
+      Picture = Picture["icon:/32/exec"]
+    }
+    { TextLabel1 TextLabel
+      MoveScaled(0,0,15,3)
+      Text = ("Ruta Salida:")
+    }
+    { ButtonRuta TextBox
+      MoveScaled(0,3,89,4)
+      Font = Font["-2"]
+    }
+    { ButtonEligeRuta Button
+      MoveScaled(90,2,7,5)
+      Picture = Picture["icon:/32/directory"]
+    }
   }
 }

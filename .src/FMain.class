@@ -2,6 +2,9 @@
 
 Public listaProcesos As New Process[]
 Public TotalProcesosActivos As Integer = 0
+Public textolog As String
+
+Public opcionesNombre As New String[]
 
 Public Sub Form_Open()
 
@@ -9,24 +12,54 @@ Public Sub Form_Open()
     definirTableviewDatos()
     Me.Title = "Divisor Multiple de Pdf. Version " & Application.Version
 
+    opcionesNombre.Add("PREFIJO-" & ".00 Memoria Explotacion " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE")
+    opcionesNombre.Add("PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE")
+    opcionesNombre.Add("PREFIJO-" & ".01 Memoria")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo 0.Indice de Anejos")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Planos")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos Climaticos E Hidrologicos")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos De Explotacion")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Graficas de las variables de auscultacion")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos De Auscultacion")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Reportaje Fotografico")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Inspecciones")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cuadros de programacion y Cronogramas de Inspecciones")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Mantenimiento")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cuadros de programacion y Cronogramas de Mantenimiento")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Inspecciones")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Estado Sistema Auscultacion")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informes Topografia")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Fichas Mantenimiento Correctivo")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Calidad de Aguas")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe.IE")
+    opcionesNombre.Add("PREFIJO-" & ".02 Anejo 06.Informe.IE")
+
 End
 
 Public Sub definirTableviewDatos()
 
+    Dim i As Integer
+
     With TableViewDatos
         .header = 3
         .rows.count = 40
-        .columns.count = 3
+        .columns.count = 4
         .Columns[0].title = "Pag. Inicio"
         .Columns[1].title = "Pag. Final"
         .Columns[2].title = "Nombre Salida"
         .Columns[0].width = 120
         .Columns[1].width = 120
-        .Columns[2].width = 320
+        .Columns[2].width = 580
+        .Columns[3].width = 16
         .font.name = "Sans"
         .font.size = 9
         .Background = 16777215
         .Foreground = 0
+        For I = 0 To .rows.count - 1
+            .[I, 3].picture = Picture["icon:/16/delete"]
+        Next
+
     End With
 
 End
@@ -58,7 +91,7 @@ Public Sub ButtonCargaPdf_Click()
     Dialog.Filter = ["*.pdf;*.PDF", "PDFs"]
     If Dialog.OpenFile() Then
         'ha cancelado
-    Else
+
         ButtonFicheroOriginal.text = Dialog.Path
         If ButtonRuta.text = "" Then
             'si esta vacia pongo la ruta del fichero que voy a abrir, sino no hago nada.
@@ -83,43 +116,29 @@ End
 
 Public Sub TableViewDatos_Click()
 
-    Dim opcionesNombre As New String[]
-
-    opcionesNombre.Add("PREFIJO-" & ".00 Memoria Explotacion " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE")
-    opcionesNombre.Add("PREFIJO-" & ".00 Informe Anual " & "YYYY" & " Presa " & "ZZZZZ" & ".INDICE")
-    opcionesNombre.Add("PREFIJO-" & ".01 Memoria")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo 0.Indice de Anejos")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Planos")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos Climaticos E Hidrologicos")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos De Explotacion")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Graficas de las variables de auscultacion")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Datos De Auscultacion")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Reportaje Fotografico")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Inspecciones")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Cronogramas de Mantenimiento")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Estado Sistema Auscultacion")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informes Topografia")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Fichas Mantenimiento Correctivo")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe Calidad de Aguas")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe")
-    opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe.IE")
     If TableViewDatos.column = 2 Then
         TableViewDatos.Edit(opcionesNombre, False)
     Else
+        If TableViewDatos.column = 3 Then
+            TableViewDatos[TableViewDatos.Row, 0].text = ""
+            tableViewDatos[TableViewDatos.Row, 1].text = ""
+            TableViewDatos[TableViewDatos.Row, 2].text = ""
+        Else
 
-        TableViewDatos.EDIT
+            TableViewDatos.EDIT
+        Endif
     Endif
 
 End
 
 Public Sub TableViewDatos_Save(Row As Integer, Column As Integer, Value As String)
 
-    If InStr(value, "Anejo") > 0 Then
-        'reemplazo contador de anejos
-        valueboxAnejo.Value = valueboxAnejo.Value + 0.5
-        value = Replace(value, "X", Right("0" & Str$(valueboxAnejo.Value), 2))
-
-    Endif
+    ' If InStr(value, "Anejo") > 0 Then
+    '     'reemplazo contador de anejos
+    '     valueboxAnejo.Value = valueboxAnejo.Value + 0.5
+    '     value = Replace(value, "X", Right("0" & Str$(valueboxAnejo.Value), 2))
+    '
+    ' Endif
 
     TableViewDatos[ROW, COLUMN].TEXT = VALUE
 
@@ -156,6 +175,8 @@ Public Sub ButtonEjecutar_Click()
             nombresalida = Replace(TableViewDatos[a, 2].text, "PREFIJO-", TextBoxPrefijo.text)
             nombresalida = Replace(nombresalida, "YYYY", TextBoxYEAR.text)
             nombresalida = Replace(nombresalida, "ZZZZZ", TextBoxPresa.text)
+
+            textolog &= gb.CrLf & "pdftk" & " " & "A=" & ButtonFicheroOriginal.text & " " & "cat" & " " & "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text & " " & "output" & " " & ButtonRuta.text & "/" & nombresalida & ".pdf" & gb.CrLf
 
             hproc = Exec ["pdftk", "A=" & ButtonFicheroOriginal.text, "cat", "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text, "output", ButtonRuta.text & "/" & nombresalida & ".pdf"]
 
@@ -279,7 +300,9 @@ Public Sub Timer1_Timer()
         Spinner1.visible = False
         ProgressBar1.value = 0
         Timer1.Stop()
-        Message.Info("Terminado de Procesar Ficheros")
+        music.load("fin.mp3")
+        music.play
+        Try Message.Info("Terminado de Procesar Ficheros")
     Else
         ProgressBar1.value = listaProcesos.count / TotalProcesosActivos
     Endif
@@ -317,5 +340,29 @@ Public Sub ButtonLimpiarNumeros_Click()
         TableViewDatos[a, 0].text = ""
         TableViewDatos[a, 1].text = ""
     Next
+
+End
+
+Public Sub ButtonNumerar_Click()
+
+    Dim value As String
+    Dim i As Integer
+
+    For i = 0 To TableViewDatos.rows.count - 1
+        value = TableViewDatos[i, 2].text
+
+        If InStr(value, "Anejo X") > 0 Then
+            'reemplazo contador de anejos
+            valueboxAnejo.Value = valueboxAnejo.Value + 1
+            TableViewDatos[i, 2].text = Replace(value, "X", Right("0" & Str$(valueboxAnejo.Value), 2))
+
+        Endif
+    Next
+
+End
+
+Public Sub PictureBox1_MouseDown()
+
+    Message.Info(textolog)
 
 End
