@@ -1,3 +1,9 @@
+* Fri Jan 29 2021 jsbsan <jusabejusabe@gmail.com> 0.0.19
+- formulario de consulta de versiones
+
+* Fri Jan 29 2021 jsbsan <jusabejusabe@gmail.com> 0.0.19
+- mejora: consulta version instalada con la version en github
+
 * Tue Jan 26 2021 jsbsan <jusabejusabe@gmail.com> 0.0.18
 - sonido final y capacidad de borrar linea completa y log de comandos realizados
 

@@ -103,6 +103,11 @@
       Picture = Picture["log.png"]
       Stretch = True
     }
+    { ButtonAyuda Button
+      MoveScaled(131,0,5,5)
+      ToolTip = ("comprobar version instalada con la de github")
+      Picture = Picture["icon:/small/help"]
+    }
   }
   { VBox1 VBox
     MoveScaled(3,22,133,58)

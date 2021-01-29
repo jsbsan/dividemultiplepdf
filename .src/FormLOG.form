@@ -1,0 +1,34 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,74,66)
+  Arrangement = Arrange.Vertical
+  { VBox1 VBox
+    MoveScaled(1,1,46,43)
+    Expand = True
+    { TextArea1 TextArea
+      MoveScaled(7,9,29,24)
+      Background = Color.Background
+      Expand = True
+      ReadOnly = True
+    }
+  }
+  { HBox1 HBox
+    MoveScaled(6,51,63,6)
+    { ButtonCopiar Button
+      MoveScaled(1,0,6,5)
+      Picture = Picture["icon:/small/copy"]
+    }
+    { Spring1 Spring
+      MoveScaled(8,2,4,1)
+    }
+    { ButtonSalir Button
+      MoveScaled(14,0,36,6)
+      Text = ("Salir")
+      Picture = Picture["icon:/small/close"]
+    }
+    { Spring2 Spring
+      MoveScaled(54,2,5,2)
+    }
+  }
+}

@@ -1,0 +1,47 @@
+' Gambas module file
+
+Public Sub comprobar(raw As String) As Boolean ''ejemplo ruta: https://github.com/jsbsan/dividemultiplepdf/blob/master/.project
+
+    Dim vChk As String
+
+    vChk = GitVersion(raw)
+
+    If Application.Version <> vChk Then
+        Message.Info(("Version instalada en este ordenador:" & Application.version & gb.crlf & "Version encontrada en github:") & ": " & vChk & gb.CrLf & raw)
+    Else
+        Message.Info(("Version: " & Application.Version & gb.crlf & "Version instalada igual a la que hay en github"))
+    Endif
+
+End
+
+Public Function gitVersion(raw As String) As String
+
+    Dim s As String
+    Dim stx As String[]
+    Dim r As String
+    Dim v As String
+    Dim comando As String
+
+    v = ""
+    If Exist("/tmp/project.txt") Then
+        Shell "rm /tmp/project.txt" Wait
+    Endif
+
+    comando = "wget -O '/tmp/project.txt' '" & raw & "'"
+
+    Shell comando Wait
+    If Exist("/tmp/project.txt") Then
+        s = File.Load("/tmp/project.txt")
+        stx = Split(s, "\n")
+        For Each r In stx
+            If InStr(r, "Version=") Then
+                If Split(r, "=")[0] = "Version" Then
+                    v = Split(r, "=")[1]
+                    Break
+                Endif
+            Endif
+        Next
+    Endif
+    Return v
+
+End

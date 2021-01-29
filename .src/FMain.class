@@ -50,7 +50,7 @@ Public Sub definirTableviewDatos()
         .Columns[2].title = "Nombre Salida"
         .Columns[0].width = 120
         .Columns[1].width = 120
-        .Columns[2].width = 580
+        .Columns[2].width = 630
         .Columns[3].width = 16
         .font.name = "Sans"
         .font.size = 9
@@ -363,6 +363,13 @@ End
 
 Public Sub PictureBox1_MouseDown()
 
-    Message.Info(textolog)
+    FormLOG.texto = textolog
+    FormLOG.Show()
+
+End
+
+Public Sub ButtonAyuda_Click()
+
+    ChekearGithub.comprobar("https://raw.githubusercontent.com/jsbsan/dividemultiplepdf/master/.project")
 
 End

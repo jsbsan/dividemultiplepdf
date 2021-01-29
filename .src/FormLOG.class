@@ -1,0 +1,23 @@
+' Gambas class file
+
+Public texto As String
+
+Public Sub Form_Open()
+
+    TextArea1.text = texto
+
+    Me.center
+
+End
+
+Public Sub ButtonCopiar_Click()
+
+    Clipboard.copy(TextArea1.text, "text/html")
+
+End
+
+Public Sub ButtonSalir_Click()
+
+    Me.Close()
+
+End
