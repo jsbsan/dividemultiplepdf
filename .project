@@ -2,7 +2,7 @@
 Title=dividemultiplepdf
 Startup=FMain
 Icon=pdf.png
-Version=0.0.19
+Version=0.0.20
 Component=gb.image
 Component=gb.gui.qt
 Component=gb.form
@@ -18,7 +18,7 @@ Maintainer=jsbsan
 Address=jusabejusabe@gmail.com
 Url=https://jsbsan.blogspot.com/
 License=General Public License
-PackageName=dividemultiplepdf-0.0.19
+PackageName=dividemultiplepdf-0.0.20
 CreateEachDirectory=1
 Packager=1
 Systems=debian

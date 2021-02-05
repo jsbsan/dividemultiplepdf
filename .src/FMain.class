@@ -57,7 +57,7 @@ Public Sub definirTableviewDatos()
         .Background = 16777215
         .Foreground = 0
         For I = 0 To .rows.count - 1
-            .[I, 3].picture = Picture["icon:/16/delete"]
+            .[I, 3].picture = Picture["CuboBasura.png"] 'elimina contenido de la fila
         Next
 
     End With
@@ -158,6 +158,12 @@ Public Sub ButtonEjecutar_Click()
     Dim nombresalida As String
     Dim hproc As Process
     Dim a As Integer
+    Dim resp As Integer
+
+    If TextBoxPrefijo.text = "" Then
+        resp = Message.Error("El prefijo esta en blanco, ¿continuar?", "Si", "No")
+        If resp = 2 Then Return
+    Endif
 
     listaProcesos.Clear()
 
@@ -371,5 +377,11 @@ End
 Public Sub ButtonAyuda_Click()
 
     ChekearGithub.comprobar("https://raw.githubusercontent.com/jsbsan/dividemultiplepdf/master/.project")
+
+End
+
+Public Sub ButtonRutaFichero_Click()
+
+    ButtonRuta.text = File.Dir(ButtonFicheroOriginal.text)
 
 End
