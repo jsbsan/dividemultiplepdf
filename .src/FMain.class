@@ -35,6 +35,12 @@ Public Sub Form_Open()
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo X.Informe.IE")
     opcionesNombre.Add("PREFIJO-" & ".02 Anejo 06.Informe.IE")
 
+    If Application.Args.Count = 2 Then
+
+        ButtonFicheroOriginal.TEXT = Application.Args[1]
+        RellenarDatos()
+    Endif
+
 End
 
 Public Sub definirTableviewDatos()
@@ -184,7 +190,7 @@ Public Sub ButtonEjecutar_Click()
 
             textolog &= gb.CrLf & "pdftk" & " " & "A=" & ButtonFicheroOriginal.text & " " & "cat" & " " & "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text & " " & "output" & " " & ButtonRuta.text & "/" & nombresalida & ".pdf" & gb.CrLf
 
-            hproc = Exec ["pdftk", "A=" & ButtonFicheroOriginal.text, "cat", "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text, "output", ButtonRuta.text & "/" & nombresalida & ".pdf"]
+            hproc = Exec ["pdftk", "A=" & ButtonFicheroOriginal.text, "cat", "A" & TableViewDatos[a, 0].text & "-" & TableViewDatos[a, 1].text, "output", ButtonRuta.text & "/" & nombresalida & ".pdf"] For Read As "Proceso"
 
             listaProcesos.Add(HPROC)
         Endif
@@ -193,6 +199,16 @@ Public Sub ButtonEjecutar_Click()
     TotalProcesosActivos = listaProcesos.Count
 
     ' Message.Info("ok, en segundo plano se estan realizando los trabajos")
+
+End
+
+Public Sub Proceso_read()
+
+    Dim salida As String
+
+    salida = Read #Last, Lof(Last)
+
+    textolog &= salida
 
 End
 
@@ -319,6 +335,13 @@ Public Sub ButtonFicheroOriginal_Drop()
 
     ButtonFicheroOriginal.TEXT = Split(Drag.Data, "\r")[0]
     ButtonFicheroOriginal.TEXT = Replace(Replace(ButtonFicheroOriginal.TEXT, "%20", " "), "file://", "")
+
+    RellenarDatos()
+
+End
+
+Public Sub RellenarDatos() ''rellena los datos con el nombre del fichero.
+
     If ButtonRuta.text = "" Then
         'si esta vacia pongo la ruta del fichero que voy a abrir, sino no hago nada.
         ButtonRuta.text = File.Dir(ButtonFicheroOriginal.TEXT)
